@@ -12,13 +12,15 @@ class AnalyticsHelper extends Helper
     private $sourceHttps;
     private $sourceHttp;
     private $sourceEndpoint;
+    private $doubleClickEnabled;
 
-    public function __construct(Analytics $analytics, $sourceHttps, $sourceHttp, $sourceEndpoint)
+    public function __construct(Analytics $analytics, $sourceHttps, $sourceHttp, $sourceEndpoint, $doubleClickEnabled)
     {
         $this->analytics = $analytics;
         $this->sourceHttps = $sourceHttps;
         $this->sourceHttp = $sourceHttp;
         $this->sourceEndpoint = $sourceEndpoint;
+        $this->doubleClickEnabled = $doubleClickEnabled;
     }
 
     public function getAllowAnchor($trackerKey)
@@ -137,6 +139,11 @@ class AnalyticsHelper extends Helper
     public function getTableId()
     {
         return $this->analytics->getTableId();
+    }
+
+    public function isDoubleClickEnabled()
+    {
+        return (bool) $this->doubleClickEnabled;
     }
 
     public function isTransactionValid()

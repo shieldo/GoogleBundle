@@ -124,9 +124,29 @@ if ( _gaq == null || typeof(_gaq) != 'array') { var _gaq = window._gaq = []; }
 
 {% endfor %}
 
+    ga2.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+
+
 (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? '{{ google_analytics.sourceHttps | raw }}' : '{{ google_analytics.sourceHttp | raw }}') + '{{ google_analytics.sourceEndpoint | raw }}';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    if (typeof DOUBLECLICK_ENABLED === undefined || DOUBLECLICK_ENABLED === false) {
+
+        {# notify the trackers that adwords has been blocked #}
+        {% for key, tracker in google_analytics.trackers %}
+            AntiMattr.GoogleAnalytics.notifyEvent(
+                      '{{ google_analytics.trackerName(key) }}'
+                    , '{{ Site }}'
+                    , '{{ adwords_blocking }}'
+                    , '{{ Adwords has been blocked by this user }}'
+            );
+        {% endfor %}
+
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? '{{ google_analytics.sourceHttps | raw }}' : '{{ google_analytics.sourceHttp | raw }}') + '{{ google_analytics.sourceEndpoint | raw }}';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    } else {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    }
 })();
 </script>

@@ -80,6 +80,9 @@ class GoogleExtension extends Extension
             if (isset($config['js_source_endpoint'])) {
                 $container->setParameter('google.analytics.js_source_endpoint', $config['js_source_endpoint']);
             }
+            if (isset($config['doubleclick_enabled'])) {
+                $container->setParameter('google.analytics.doubleclick_enabled', $config['doubleclick_enabled']);
+            }
         }
     }
 

@@ -9,6 +9,7 @@
         <parameter key="google.analytics.js_source_https">https://ssl</parameter>
         <parameter key="google.analytics.js_source_http">http://www</parameter>
         <parameter key="google.analytics.js_source_endpoint">.google-analytics.com/ga.js</parameter>
+        <parameter key="google.analytics.doubleclick_enabled">false</parameter>
     </parameters>
 
     <services>
@@ -25,6 +26,7 @@
             <argument>%google.analytics.js_source_https%</argument>
             <argument>%google.analytics.js_source_http%</argument>
             <argument>%google.analytics.js_source_endpoint%</argument>
+            <argument>%google.analytics.doubleclick_enabled%</argument>
         </service>
 
         <service id="twig.extension.google_analytics" class="AntiMattr\GoogleBundle\Extension\AnalyticsExtension" public="false">

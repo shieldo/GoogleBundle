@@ -1,4 +1,4 @@
-if (google_analytics.doubleClickEnabled) {
+if (CONFIG_DOUBLECLICK_ENABLED) {
 	var DOUBLECLICK_ENABLED = true;
 } else {
 	var DOUBLECLICK_ENABLED = false;

@@ -8,7 +8,7 @@ AntiMattr.GoogleAnalytics.onGatLoad = function(callback) {
     } else {
         var listener = this;
         setTimeout(function(){
-            listener.onGatLoad(callback);					
+            listener.onGatLoad(callback);                   
         },100);
     }
 };
@@ -124,19 +124,16 @@ if ( _gaq == null || typeof(_gaq) != 'array') { var _gaq = window._gaq = []; }
 
 {% endfor %}
 
-    ga2.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-
-
 (function() {
-    if (typeof DOUBLECLICK_ENABLED === undefined || DOUBLECLICK_ENABLED === false) {
+    if (typeof DOUBLECLICK_ENABLED === 'undefined' || DOUBLECLICK_ENABLED === false) {
 
         {# notify the trackers that adwords has been blocked #}
         {% for key, tracker in google_analytics.trackers %}
             AntiMattr.GoogleAnalytics.notifyEvent(
                       '{{ google_analytics.trackerName(key) }}'
-                    , '{{ Site }}'
-                    , '{{ adwords_blocking }}'
-                    , '{{ Adwords has been blocked by this user }}'
+                    , 'Site'
+                    , 'adwords_blocking'
+                    , 'Adwords has been blocked by this user'
             );
         {% endfor %}
 
